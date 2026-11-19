@@ -109,7 +109,7 @@ def preprocess_text(text):
 @st.cache_resource
 def load_models():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    model_dir = os.path.join(base_dir, "models")
+    model_dir = os.path.join(base_dir, "..", "models")
 
     model = joblib.load(os.path.join(model_dir, "ml_model.pkl"))
     tfidf = joblib.load(os.path.join(model_dir, "tfidf_vectorizer.pkl"))
