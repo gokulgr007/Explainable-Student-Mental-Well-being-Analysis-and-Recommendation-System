@@ -5,6 +5,7 @@ import nltk
 import shap
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.tokenize import word_tokenize
@@ -107,9 +108,12 @@ def preprocess_text(text):
 
 @st.cache_resource
 def load_models():
-    model = joblib.load("../models/ml_model.pkl")
-    tfidf = joblib.load("../models/tfidf_vectorizer.pkl")
-    recommendation_df = joblib.load("../models/recommendations.pkl")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    model_dir = os.path.join(base_dir, "models")
+
+    model = joblib.load(os.path.join(model_dir, "ml_model.pkl"))
+    tfidf = joblib.load(os.path.join(model_dir, "tfidf_vectorizer.pkl"))
+    recommendation_df = joblib.load(os.path.join(model_dir, "recommendations.pkl"))
 
     recommendation_matrix = tfidf.transform(recommendation_df['cleaned_text'])
 
